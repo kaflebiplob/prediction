@@ -10,39 +10,31 @@ const getPredictedAge = async (name: string) => {
 };
 const getPredictedGender = async (name: string) => {
   const response = await fetch(`https://api.genderize.io/?name=${name}`);
- 
+
   return response.json();
 };
 const getPredictedNationality = async (name: string) => {
   const response = await fetch(`https://api.nationalize.io/?name=${name}`);
+
   return response.json();
 };
 export default async function PageName({ params }: any) {
-  const getage = getPredictedAge(params.name)
-  const getgender= getPredictedGender(params.name)
-  const getnational = getPredictedNationality(params.name)
+  const getage = getPredictedAge(params.name);
+  const getgender = getPredictedGender(params.name);
+  const getnational = getPredictedNationality(params.name);
 
-  const[age,gender,nationality]= await Promise.all([
+  const [age, gender, nationality] = await Promise.all([
     getage,
     getgender,
-    getnational
-  ])
-  return( <div>
+    getnational,
+  ]);
+  return (
     <div>
-      {params.name}
+      <div>{params.name}</div>
+      <div>Age:{age?.age}</div>
+      <div>{params.age}</div>
+      <div>Gender:{gender?.gender}</div>
+      <div>Country:{nationality?.country?.[0]?.country_id}</div>
     </div>
-    <div>
-     Age:{age?.age}
-    </div>
-    <div>{params.age}</div>
-    <div>
-      Gender:{gender?.gender}
-    </div>
-    <div>
-      Country:{nationality?.country?.[0]?.country_id}
-    </div>
-  
-  
-  </div>
-  )
+  );
 }
