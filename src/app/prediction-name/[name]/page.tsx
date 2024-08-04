@@ -29,12 +29,15 @@ export default async function PageName({ params }: any) {
     getnational,
   ]);
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center m-12 border-2 border-black bg-black text-white p-10">
+      <div className="m-4 ">
+
       <div>{params.name}</div>
       <div>Age:{age?.age}</div>
       <div>{params.age}</div>
       <div>Gender:{gender?.gender}</div>
       <div>Country:{nationality?.country?.[0]?.country_id}</div>
+      </div>
     </div>
   );
 }
